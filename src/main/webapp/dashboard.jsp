@@ -42,12 +42,6 @@
 		<center>
 			<h1>Welcome to Dashboard</h1>
 		</center>
-		
-		<%
-			if(session.getAttribute("email") == null){
-				response.sendRedirect("login.jsp");
-			}
-		%>
 	</div>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"

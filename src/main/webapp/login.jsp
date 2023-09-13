@@ -17,28 +17,23 @@
 		<div class="row">
 			<div class="col-2"></div>
 			<div class="col-4">
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
+				<br /> <br /> <br />
+				<br /> <br />
 				<h2>Login Form</h2>
-				<br />
-				<br />
-				<form action="login">
+				<br /> <br />
+				<form action="<%=request.getContextPath()%>/loginServlet"
+					method="post">
 					<div class="mb-3">
-						<label class="form-label">Email
-							address</label> <input type="email" class="form-control"
-							name="email" required>
+						<label class="form-label">Email address</label> <input
+							type="email" class="form-control" name="email" required>
 						<!-- 						<div id="emailHelp" class="form-text">We'll never share your
 							email with anyone else.</div> -->
 					</div>
 					<div class="mb-3">
-						<label class="form-label">Password</label>
-						<input type="password" class="form-control"
-							name="password" required>
+						<label class="form-label">Password</label> <input type="password"
+							class="form-control" name="password" required>
 					</div>
-<!-- 					<div class="mb-3 form-check">
+					<!-- 					<div class="mb-3 form-check">
 						<input type="checkbox" class="form-check-input" id="exampleCheck1">
 						<label class="form-check-label" for="exampleCheck1">Check
 							me out</label>
