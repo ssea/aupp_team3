@@ -48,13 +48,15 @@ CREATE TABLE IF NOT EXISTS `persons` (
   `password` varchar(255) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   `phone` varchar(50) DEFAULT NULL,
+  `verify_status` varchar(1) DEFAULT 'N' COMMENT 'N=Not yet, Y=Verified',
+  `verify_code` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table rds_db.persons: ~1 rows (approximately)
-INSERT INTO `persons` (`id`, `name`, `gender`, `user_name`, `token`, `password`, `email`, `phone`, `created_at`) VALUES
-	(1, 'SORN Sea', 'Male', NULL, NULL, '123456', 'sorn.sea@gmail.com', '015842942', '2023-09-13 07:29:49');
+INSERT INTO `persons` (`id`, `name`, `gender`, `user_name`, `token`, `password`, `email`, `phone`, `verify_status`, `verify_code`, `created_at`) VALUES
+	(1, 'SORN Sea', 'Male', NULL, NULL, '123456', 'sorn.sea@gmail.com', '09284251', 'N', NULL, '2023-09-14 02:42:21');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

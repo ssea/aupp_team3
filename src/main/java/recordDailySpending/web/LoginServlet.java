@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
 		try {
 			if (personDao.loginPerson(person)) {
 				// System.out.println("========22========");
-				response.sendRedirect("dashboard.jsp");
+				response.sendRedirect("dashboard/dashboard.jsp");
 			} else {
 				HttpSession session = request.getSession();
 				// session.setAttribute("sLoginMessage", "Your E-mail or password not
