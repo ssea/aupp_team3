@@ -27,7 +27,7 @@
  
     <context-param>
         <param-name>pass</param-name>
-        <param-value>dkzgqomxzhxluxypd</param-value>
+        <param-value>dkzgqomxzhxluxyp</param-value>
     </context-param>
     
   <welcome-file-list>
