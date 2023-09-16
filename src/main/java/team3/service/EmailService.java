@@ -35,4 +35,7 @@ public class EmailService {
 
 		}
 	}
+//	mail.sendEmail(u.getEmail(), "Account Activation",
+//			"<a href=" + getBaseUrl() + "/activate/" + getMd5(u.getEmail() + u.getName() + u.getPasswd())
+//					+ ">click here to activate your account with " + u.getEmail() + " </a>");
 }

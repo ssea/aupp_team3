@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Login</title>
+<title>Register</title>
 <div th:replace="index :: header"></div>
 </head>
 <body>
@@ -13,16 +13,19 @@
 			<div class="mb-3">
 				<label for="name" class="form-label">Name</label> <input type="text"
 					class="form-control" id="name">
+				<div class="invalid-feedback"></div>
 			</div>
 			<div class="mb-3">
 				<label for="email" class="form-label">Email address</label> <input
 					type="email" class="form-control" id="email"
 					placeholder="name@example.com">
+				<div class="invalid-feedback"></div>
 			</div>
 			<div class="mb-3">
 				<label for="passwd" class="form-label">Password</label> <input
 					type="password" id="passwd" class="form-control"
 					aria-describedby="passwordHelpBlock">
+				<div class="invalid-feedback"></div>
 			</div>
 			<div class="mb-3">
 				<label for="confirmPasswd" class="form-label">Confirm
@@ -30,11 +33,12 @@
 					class="form-control" aria-describedby="passwordHelpBlock">
 			</div>
 			<div class="col-12">
-				<button class="btn btn-primary w-100" type="submit">Register</button>
+				<button class="btn btn-primary w-100" type="submit" id="registerBtn">Register</button>
 				<span>Already have an account? <a href="login"> Login</a></span>
 			</div>
 		</form>
 	</div>
+	<script type="text/javascript" th:src="@{js/register.js}"></script>
 	<div th:replace="index :: footer"></div>
 </body>
 </html>

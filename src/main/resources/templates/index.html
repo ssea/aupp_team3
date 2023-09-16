@@ -11,16 +11,22 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"
 		integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css">
+	<script
+		src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.all.min.js"></script>
 </div>
 
 <div th:fragment="navbar" th:remove="tag">
 	<nav class="navbar navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#">Navbar</a>
-			<ul class="navbar-nav ms-auto">
+			<ul class="navbar-nav ms-auto" id="UserDisplay">
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" role="button"
-					data-bs-toggle="dropdown" aria-expanded="false">Name Name</a>
+					data-bs-toggle="dropdown" aria-expanded="false" id="UserName">Name Name</a>
 					<ul class="dropdown-menu">
 						<li><a class="dropdown-item" href="logout">Logout</a></li>
 					</ul></li>
