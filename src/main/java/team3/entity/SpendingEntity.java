@@ -23,8 +23,8 @@ public class SpendingEntity {
 
     @Column(name = "user_id") String userId;
     @Column(name = "category_id") String categoryId;
-    @Column(name = "currency_type") String currencyType;
-    @Column(name = "value") String value;
+    @Column(name = "amount_khr") String amountKhr;
+    @Column(name = "amount_usd") String amountUsd;
     @Column(name = "description") String description;
     @Column(name = "date_spend") String date_spend;
 }
