@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("${url_prefix.api.secure}")
-@Log4j2
 public class SpendingController {
     @GetMapping("/daily_spend")
-    public void getCategories(ServletRequest servletRequest){
-        log.info("== Get Daily spending ==");
+    public void getSpending(ServletRequest servletRequest){
+    	System.out.print("== Get spending ==");
     }
 }
