@@ -1,8 +1,6 @@
 package team3.entity;
 
-
 import lombok.*;
-import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,24 +9,22 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity()
-@Table(name = "tbl_category")
+@Table(name = "tbl_spending")
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CategoryEntity {
+public class SpendingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(name = "name")
-    String name;
-
-    @Column(name = "status")
-    String status;
-
-    @Column(name = "created_at")
-    Date createdAt;
+    @Column(name = "user_id") String userId;
+    @Column(name = "category_id") String categoryId;
+    @Column(name = "currency_type") String currencyType;
+    @Column(name = "value") String value;
+    @Column(name = "description") String description;
+    @Column(name = "date_spend") String date_spend;
 }
