@@ -4,10 +4,113 @@
 <meta charset="UTF-8">
 <title>Home</title>
 <div th:replace="index :: header"></div>
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/gijgo/1.9.14/combined/css/gijgo.min.css"
+	integrity="sha512-9aomOZ/zmsiod+U3sukisKwsGHSlhezpxtRx7LFNEdvqnnVi7/tKgAS0v4kbH0pqY1UNs4BgYwTkRUDtLWk5Kw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/gijgo/1.9.14/combined/js/gijgo.min.js"
+	integrity="sha512-JsHMa3rSDTAy7MZCj1DWbL0YwAAysj23aWwCOTWKs3tlqO3ptwDhw3OHimYoeqryhTmSLFRn29C8qHK/oT/iZA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </head>
 <body>
 	<div th:replace="index :: navbar"></div>
-	<h1>page home</h1>
+	<div class="container-fluid m-3">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="d-flex justify-content-between">
+					<h5 class="my-auto">Expense List</h5>
+					<div class="my-auto">
+						<input id="showDate" type="text" class="form-control date-input">
+					</div>
+					<div class="my-auto">
+						<button id="AddBtn" class="btn btn-sm btn-success">Add
+							New</button>
+					</div>
+				</div>
+
+				<table id="ExpenseTable"
+					class="text-center table table-bordered border-primary table-striped table-hover">
+					<thead>
+						<tr>
+							<th class="col">#</th>
+							<th class="col">Category</th>
+							<th class="col">Riel_Amount</th>
+							<th class="col">USD_Amount</th>
+							<th class="col">Description</th>
+							<th class="col">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-6"></div>
+		</div>
+	</div>
+	<div class="modal fade" id="ExpenseModal" data-bs-backdrop="static"
+		data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="ExpenseModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5 fw-bold" id="ExpenseModalLabel">Create
+						New Expense</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form class="row g-3 needs-validation" novalidate>
+						<div class="col-12">
+							<label for="name" class="form-label">Category</label> <select
+								id="CategorySelect" class="form-select">
+
+							</select>
+						</div>
+						<div class="col-12">
+							<label for="spendDate" class="form-label">Date</label> <input
+								id="spendDate" type="text" class="form-control date-input">
+						</div>
+						<div class="col-12">
+							<div class="row">
+								<div class="col-8">
+									<label for="amount" class="form-label">Amount</label> <input
+										type="number" id="amount" class="form-control">
+									<div class="invalid-feedback"></div>
+								</div>
+								<div class="col-4">
+									<label for="Amount" class="form-label">Currency Type</label>
+									<div>
+										<div class="d-flex justify-content-between" id="CurrencyType"
+											role="group" aria-label="Basic radio toggle button group">
+											<input type="radio" class="btn-check currency-type"
+												name="CurrencyType" value="dollar" id="dollar"
+												autocomplete="off" checked> <label
+												class="btn btn-outline-primary col" for="dollar">Dollar</label>
+											<input type="radio" class="btn-check currency-type"
+												name="CurrencyType" value="riel" id="riel"
+												autocomplete="off"> <label
+												class="btn btn-outline-primary col" for="riel">Riel</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<label for="decription" class="form-label">Description</label>
+							<textarea id="description" class="form-control"></textarea>
+						</div>
+						<div class="col-12">
+							<button class="btn btn-primary w-100" type="submit" id="SaveBtn">Save</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 	<script type="text/javascript" th:src="@{js/home.js}"></script>
 	<div th:replace="index :: footer"></div>
 </body>

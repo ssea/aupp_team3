@@ -65,4 +65,12 @@ public class ViewController extends BaseController {
 		}
 		return "pages/set";
 	}
+	
+	@GetMapping("/category")
+	public String category() {
+		if (!Authenticated()) {
+			return "redirect:login";
+		}
+		return "pages/category";
+	}
 }

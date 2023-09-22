@@ -55,6 +55,45 @@ const ErrorModal = (error) => {
 }
 /// end swal
 
+
+
+$(document).on("keydown", "input[type='number']", function (e) {
+    const validChars = ['e', '+', '-'];
+    if (validChars.includes(e.key)) {
+        e.preventDefault();
+    }
+});
+$(document).on("keydown", "input[type='number'].integer", function (e) {
+    const validChars = ['e', '+', '-', '.'];
+    if (validChars.includes(e.key)) {
+        e.preventDefault();
+    }
+});
+$(document).on("keydown", "input:not(.nospace)", function (e) {
+    const str = $(this).val();
+    if (e.keyCode === 32) {
+        e.preventDefault();
+        if (str !== '' && str.slice(-1) !== ' ') {
+            $(this).val(str + ' ')
+        }
+    }
+});
+$(document).on("keydown", "input.nospace", function (e) {
+    const str = $(this).val();
+    if (e.keyCode === 32) {
+        e.preventDefault();
+    }
+});
+$(document).on("keyup", "input[type='text'].uppercase", function (e) {
+    $(this).val(this.value.toUpperCase())
+});
+$(document).on("keyup", "input[type='text'].lowercase", function (e) {
+    $(this).val(this.value.toLowerCase())
+});
+$('.modal').on('hidden.bs.modal,hide.bs.modal', function () {
+    $('body').css('padding-right', 0);
+    $('.temp').remove();
+});
 $(document).ready(async function() {
 	try {
 		const result = await axios.get(
@@ -62,8 +101,8 @@ $(document).ready(async function() {
 		);
 		const user = result.data;
 		$('#UserName').html(user.name);
-		$('#UserDisplay').show();
+		$('.login-display').show();
 	} catch (error) {
-		$('#UserDisplay').hide();
+		$('.login-display').hide();
 	} 
 });
