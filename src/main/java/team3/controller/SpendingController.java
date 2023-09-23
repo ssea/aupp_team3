@@ -3,6 +3,9 @@ package team3.controller;
 import team3.entity.CategoryEntity;
 import team3.entity.SpendingEntity;
 import team3.entity.User;
+import team3.response.ExpenseAverage;
+import team3.response.MaxExpense;
+import team3.response.TopSpendItem;
 import team3.service.CategoryService;
 import team3.service.SpendingService;
 import team3.service.UserService;
@@ -125,4 +128,74 @@ public class SpendingController extends BaseController{
 		spendingService.deleteExpense(id);
 		return ResponseEntity.status(HttpStatus.OK).body(deleteExpense);
 	}
+
+    @GetMapping("/findDateWithMaxExpense")
+    public ResponseEntity<MaxExpense> findDateWithMaxExpense(@RequestParam Map<String, String> reqParam) throws ParseException{
+    	if (!Authenticated()) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+		}
+		String token = getCookieValue("token");
+		User user = userService.getByToken(token);
+		String fromDate = reqParam.get("fromDate");
+		String toDate = reqParam.get("toDate");
+		
+		
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat format2 = new SimpleDateFormat("dd-MM-yyyy");
+		Date from_date = format2.parse(fromDate);
+		String formettedFromDate = format1.format(from_date);
+		
+		Date to_date = format2.parse(toDate);
+		String formettedToDate = format1.format(to_date);
+		
+		MaxExpense me = spendingService.findDateWithMaxExpense(user.getId(),formettedFromDate, formettedToDate);
+		return ResponseEntity.status(HttpStatus.OK).body(me);
+    }
+    
+    @GetMapping("/findThreeItemsMaxExpense")
+    public ResponseEntity<List<TopSpendItem>> findThreeItemsMaxExpense(@RequestParam Map<String, String> reqParam) throws ParseException{
+    	if (!Authenticated()) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+		}
+		String token = getCookieValue("token");
+		User user = userService.getByToken(token);
+		String fromDate = reqParam.get("fromDate");
+		String toDate = reqParam.get("toDate");
+		
+		
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat format2 = new SimpleDateFormat("dd-MM-yyyy");
+		Date from_date = format2.parse(fromDate);
+		String formettedFromDate = format1.format(from_date);
+		
+		Date to_date = format2.parse(toDate);
+		String formettedToDate = format1.format(to_date);
+		
+		List<TopSpendItem> items = spendingService.findThreeItemsMaxExpense(user.getId(),formettedFromDate, formettedToDate);
+		return ResponseEntity.status(HttpStatus.OK).body(items);
+    }
+    
+    
+    @GetMapping("/findExpenseAverage")
+    public ResponseEntity<ExpenseAverage> findExpenseAverage(@RequestParam Map<String, String> reqParam) throws ParseException{
+    	if (!Authenticated()) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+		}
+		String token = getCookieValue("token");
+		User user = userService.getByToken(token);
+		String fromDate = reqParam.get("fromDate");
+		String toDate = reqParam.get("toDate");
+		
+		
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat format2 = new SimpleDateFormat("dd-MM-yyyy");
+		Date from_date = format2.parse(fromDate);
+		String formettedFromDate = format1.format(from_date);
+		
+		Date to_date = format2.parse(toDate);
+		String formettedToDate = format1.format(to_date);
+		
+		ExpenseAverage avg = spendingService.findExpenseAverage(user.getId(),formettedFromDate, formettedToDate);
+		return ResponseEntity.status(HttpStatus.OK).body(avg);
+    }
 }

@@ -21,6 +21,7 @@ $(document).ready(function() {
 		}
 	});
 	generateExpenseTable()
+	generateReport()
 });
 
 
@@ -43,6 +44,7 @@ $('#SaveBtn').click(async function(e) {
 			}
 		});
 		generateExpenseTable();
+		generateReport();
 		$('#ExpenseModal').modal('hide');
 		MessageModal('success', 'Creation Succeed', 'Expense has been created.');
 	} catch (error) {
@@ -92,8 +94,8 @@ $(document).on('click', '.delete-btn', async function() {
 					params: {
 						id: id
 					}
-				}
-				)
+				})
+				generateReport();
 				MessageModal('success', 'Delete Succeed', 'Expense record has been deleted.');
 				tr.remove();
 			} catch (error) {
@@ -126,8 +128,8 @@ async function generateExpenseTable() {
 				'<tr id="' + expense.id + '">'
 				+ '<td>' + (row++) + '</td>'
 				+ '<td>' + expense.category.name + '</td>'
-				+ '<td class="' + (expense.type === 'riel' ? 'text-success fw-bold':'') + '">' + expense.amountKhr + '៛</td>'
-				+ '<td class="' + (expense.type === 'dollar' ? 'text-success fw-bold':'') + '">' + expense.amountUsd + '$</td>'
+				+ '<td class="' + (expense.type === 'riel' ? 'text-success fw-bold' : '') + '">' + expense.amountKhr + '៛</td>'
+				+ '<td class="' + (expense.type === 'dollar' ? 'text-success fw-bold' : '') + '">' + expense.amountUsd + '$</td>'
 				+ '<td>' + expense.description + '</td>'
 				+ '<td><button class="delete-btn btn btn-sm btn-danger">Delete</button></td>' +
 				'</tr>'
@@ -137,3 +139,72 @@ async function generateExpenseTable() {
 		console.log(error)
 	}
 }
+
+$('#ExpenseModal').on('shown.bs.modal', function() {
+	$('#name').focus();
+});
+$('#ExpenseModal').on('hide.bs.modal', function() {
+	$('#amount').val('');
+	$('#description').val('');
+});
+
+
+async function generateReport() {
+	try {
+		const results = await Promise.all([
+			axios.get('/expense/findDateWithMaxExpense', {
+				params: {
+					fromDate: $('#fromDate').val(),
+					toDate: $('#toDate').val(),
+				}
+			}),
+			axios.get('/expense/findThreeItemsMaxExpense', {
+				params: {
+					fromDate: $('#fromDate').val(),
+					toDate: $('#toDate').val(),
+				}
+			}),
+			axios.get('/expense/findExpenseAverage', {
+				params: {
+					fromDate: $('#fromDate').val(),
+					toDate: $('#toDate').val(),
+				}
+			})
+		]);
+		if (results[0].data === "") {
+			$('#MaxDate').html('<=====>')
+			$('#MaxUsd').html('0$')
+			$('#MaxKhr').html('0៛')
+		} else {
+			$('#MaxDate').html(results[0].data.spendDate)
+			$('#MaxUsd').html(results[0].data.maxAmountUsd + '$')
+			$('#MaxKhr').html(results[0].data.maxAmountKhr + '៛')
+		}
+
+
+
+		$('#Top3Table').find('tbody').empty();
+		const topItems = results[1].data;
+		let row = 1;
+		topItems.forEach(i => {
+			$('#Top3Table').find('tbody').append(
+				'<tr>'
+				+ '<td>' + (row++) + '</td>'
+				+ '<td>' + i.categoryName + '</td>'
+				+ '<td>' + i.maxAmountUsd + '$</td>'
+				+ '<td>' + i.maxAmountKhr + '៛</td>' +
+				'</tr>'
+			);
+		});
+
+		$('#SpendCount').html(results[2].data.spendCount)
+		$('#AvgUsd').html(results[2].data.avgAmountUsd + '$ / time (total ' + results[2].data.sumAmountUsd + '$)')
+		$('#AvgKhr').html(results[2].data.avgAmountKhr + '៛ / time (total ' + results[2].data.sumAmountKhr + '៛)')
+	} catch (error) {
+		window.location.reload();
+	}
+}
+
+$('#fromDate,#toDate').change(function() {
+	generateReport();
+})
