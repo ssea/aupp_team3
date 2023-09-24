@@ -198,4 +198,16 @@ public class SpendingController extends BaseController{
 		ExpenseAverage avg = spendingService.findExpenseAverage(user.getId(),formettedFromDate, formettedToDate);
 		return ResponseEntity.status(HttpStatus.OK).body(avg);
     }
+    
+    @GetMapping("/getMaxSpendGroupByDate")
+    public ResponseEntity<List<MaxExpense>> getMaxSpendGroupByDate(@RequestParam Map<String, String> reqParam) throws ParseException{
+    	if (!Authenticated()) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+		}
+		String token = getCookieValue("token");
+		User user = userService.getByToken(token);
+		
+		List<MaxExpense> expenses = spendingService.getMaxSpendGroupByDate(user.getId());
+		return ResponseEntity.status(HttpStatus.OK).body(expenses);
+    }
 }

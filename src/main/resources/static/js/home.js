@@ -1,3 +1,30 @@
+const ctx = document.getElementById('myChart');
+
+const myChart = new Chart(ctx, {
+	type: 'line',
+	data: {
+		labels: [],
+		datasets: [{
+			label: 'Expense In Dollar',
+			data: [],
+			borderWidth: 1
+		}, {
+			label: 'Expense In Riel',
+			data: [],
+			borderWidth: 1
+		}]
+	},
+	options: {
+		scales: {
+			y: {
+				beginAtZero: true
+			}
+		}
+	}
+});
+
+
+
 $(document).ready(function() {
 	const today = new Date();
 	const yyyy = today.getFullYear();
@@ -22,6 +49,7 @@ $(document).ready(function() {
 	});
 	generateExpenseTable()
 	generateReport()
+	generateChart();
 });
 
 
@@ -45,6 +73,7 @@ $('#SaveBtn').click(async function(e) {
 		});
 		generateExpenseTable();
 		generateReport();
+		generateChart();
 		$('#ExpenseModal').modal('hide');
 		MessageModal('success', 'Creation Succeed', 'Expense has been created.');
 	} catch (error) {
@@ -96,6 +125,7 @@ $(document).on('click', '.delete-btn', async function() {
 					}
 				})
 				generateReport();
+				generateChart();
 				MessageModal('success', 'Delete Succeed', 'Expense record has been deleted.');
 				tr.remove();
 			} catch (error) {
@@ -208,3 +238,21 @@ async function generateReport() {
 $('#fromDate,#toDate').change(function() {
 	generateReport();
 })
+
+
+
+
+async function generateChart() {
+	const result = await axios.get('/expense/getMaxSpendGroupByDate');
+	const expenses = result.data;
+
+	myChart.data.datasets[0].data = [];
+	myChart.data.datasets[1].data = [];
+	myChart.data.labels = [];
+	expenses.forEach(e => {
+		myChart.data.datasets[0].data.push(e.maxAmountUsd);
+		myChart.data.datasets[1].data.push(e.maxAmountKhr);
+		myChart.data.labels.push(e.spendDate);
+	});
+	myChart.update();
+}

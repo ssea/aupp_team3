@@ -19,4 +19,5 @@ public interface SpendingService {
 	public MaxExpense findDateWithMaxExpense(int userId, String fromDate,String toDate);
 	public List<TopSpendItem> findThreeItemsMaxExpense(int userId, String fromDate,String toDate);
 	public ExpenseAverage findExpenseAverage(int userId, String fromDate,String toDate);
+	public List<MaxExpense> getMaxSpendGroupByDate(int userId);
 }

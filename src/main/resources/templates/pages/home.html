@@ -14,6 +14,9 @@
 	integrity="sha512-JsHMa3rSDTAy7MZCj1DWbL0YwAAysj23aWwCOTWKs3tlqO3ptwDhw3OHimYoeqryhTmSLFRn29C8qHK/oT/iZA=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+
+<script
+	src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
 	<div th:replace="index :: navbar"></div>
@@ -21,7 +24,7 @@
 		<div class="row">
 			<div class="col-md-7 mb-3">
 				<div class="card text-center">
-					<div class="card-header">Expense List</div>
+					<div class="card-header fw-bold text-primary">Expense List</div>
 					<div class="card-body">
 						<div class="d-flex justify-content-between">
 							<div class="mt-3">
@@ -32,7 +35,7 @@
 									New</button>
 							</div>
 						</div>
-						<div class="table-responsive">
+						<div class="table-responsive" style="max-height: 300px">
 							<table id="ExpenseTable"
 								class="text-center table table-bordered border-primary table-striped table-hover">
 								<thead>
@@ -52,10 +55,16 @@
 						</div>
 					</div>
 				</div>
+				<div class="card text-center mt-3">
+					<div class="card-header fw-bold text-primary">Chart</div>
+					<div class="card-body">
+						<canvas id="myChart"></canvas>
+					</div>
+				</div>
 			</div>
 			<div class="col-md-5">
 				<div class="card text-center">
-					<div class="card-header">Report</div>
+					<div class="card-header fw-bold text-primary">Report</div>
 					<div class="card-body">
 						<div class="d-flex justify-content-between">
 							<div class="mt-3">
@@ -67,7 +76,7 @@
 						</div>
 						<div class="row">
 							<div class="col-12 mb-2">
-								<div class="card">
+								<div class="card border-primary">
 									<div class="card-header fw-bold">Maximun Spending Date</div>
 									<div class="card-body">
 										<div>
@@ -79,35 +88,37 @@
 								</div>
 							</div>
 							<div class="col-12 mb-2">
-								<div class="card">
+								<div class="card border-primary">
 									<div class="card-header fw-bold">Top 3 Spending Category</div>
 									<div class="card-body">
-										<table id="Top3Table"
-											class="text-center table table-bordered border-primary table-striped table-hover">
-											<thead>
-												<tr>
-													<th class="col">#</th>
-													<th class="col">Category</th>
-													<th class="col">Riel_Amount</th>
-													<th class="col">USD_Amount</th>
-												</tr>
-											</thead>
-											<tbody>
+										<div class="table-responsive">
+											<table id="Top3Table"
+												class="text-center table table-bordered border-primary table-striped table-hover">
+												<thead>
+													<tr>
+														<th class="col">#</th>
+														<th class="col">Category</th>
+														<th class="col">Riel_Amount</th>
+														<th class="col">USD_Amount</th>
+													</tr>
+												</thead>
+												<tbody>
 
-											</tbody>
-										</table>
+												</tbody>
+											</table>
+										</div>
 									</div>
 								</div>
 							</div>
 							<div class="col-12 mb-2">
-								<div class="card">
+								<div class="card border-primary">
 									<div class="card-header fw-bold">Average Spending</div>
 									<div class="card-body">
 										<div>
-											Total Spent: <span id="SpendCount">9</span> time
+											Total Spent: <span id="SpendCount">0</span> time
 										</div>
-										<div id="AvgUsd">213123$</div>
-										<div id="AvgKhr">2312321321៛</div>
+										<div id="AvgUsd">0$</div>
+										<div id="AvgKhr">0៛</div>
 									</div>
 								</div>
 							</div>

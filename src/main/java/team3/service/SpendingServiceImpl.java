@@ -56,4 +56,9 @@ public class SpendingServiceImpl implements SpendingService {
 		return spendingRepo.findExpenseAverage(userId, fromDate, toDate);
 	}
 
+	@Override
+	public List<MaxExpense> getMaxSpendGroupByDate(int userId) {
+		return spendingRepo.getMaxSpendGroupByDate(userId);
+	}
+
 }
