@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+<div th:replace="index :: header"></div>
+</head>
+<body>
+	<div th:replace="index :: navbar"></div>
+	<div class="container d-flex justify-content-center">
+		<form class="col-sm-4 mt-5" action="">
+			<h5 class="text-center mb-3">Login to your account</h5>
+			<div class="mb-3">
+				<label for="email" class="form-label">Email address</label> <input
+					type="email" class="form-control" id="email"
+					placeholder="name@example.com">
+				<div class="invalid-feedback"></div>
+			</div>
+			<div class="mb-3">
+				<label for="passwd" class="form-label">Password</label> <input
+					type="password" id="passwd" class="form-control"
+					aria-describedby="passwordHelpBlock">
+				<div class="invalid-feedback"></div>
+			</div>
+			<div class="col-12">
+				<button class="btn btn-primary w-100" type="submit" id="loginBtn">Login</button>
+				<div>
+					<span>Does not have an account? <a href="register">
+							Register</a></span>
+				</div>
+				<div>
+					<span>Forgot password? <a href="reset"> Reset Password</a></span>
+				</div>
+			</div>
+		</form>
+	</div>
+	<script type="text/javascript" th:src="@{js/login.js}"></script>
+	<div th:replace="index :: footer"></div>
+</body>
+</html>

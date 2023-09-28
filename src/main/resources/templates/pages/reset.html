@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+<div th:replace="index :: header"></div>
+</head>
+<body>
+	<div th:replace="index :: navbar"></div>
+	<div class="container d-flex justify-content-center">
+		<form class="col-sm-4 mt-5" action="">
+			<h5 class="text-center mb-3">Reset your password</h5>
+			<div class="mb-3">
+				<label for="email" class="form-label">Email address</label> <input
+					type="email" class="form-control" id="email"
+					placeholder="name@example.com">
+				<div class="invalid-feedback"></div>
+			</div>
+			<div class="col-12">
+				<button class="btn btn-primary w-100" type="submit" id="resetBtn">Reset</button>
+				<span>Back to login? <a href="login">
+						Login</a></span>
+			</div>
+		</form>
+	</div>
+	<script type="text/javascript" th:src="@{js/reset.js}"></script>
+	<div th:replace="index :: footer"></div>
+</body>
+</html>

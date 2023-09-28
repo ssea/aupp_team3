@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Category</title>
+<div th:replace="index :: header"></div>
+</head>
+<body>
+	<div th:replace="index :: navbar"></div>
+	<div class="d-flex justify-content-center">
+		<div class="mt-3 w-75">
+			<div class="d-flex justify-content-between">
+				<h5>Category List</h5>
+				<div class="my-auto">
+					<button id="AddBtn" class="btn btn-sm btn-success">Add New</button>
+				</div>
+			</div>
+
+			<table id="CategoryTable"
+				class="text-center table table-bordered border-primary table-striped table-hover">
+				<thead>
+					<tr>
+						<th class="col">#</th>
+						<th class="col">Name</th>
+						<th class="col">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="modal fade" id="CategoryModal" data-bs-backdrop="static"
+		data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="CategoryModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5 fw-bold" id="CategoryModalLabel">Create
+						New Category</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form class="row g-3 needs-validation" novalidate>
+						<div class="col-12">
+							<label for="name" class="form-label">Name</label> <input
+								id="name" class="form-control">
+							<div class="invalid-feedback"></div>
+						</div>
+
+						<div class="col-12">
+							<button class="btn btn-primary w-100" type="submit" id="SaveBtn">Save</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<script type="text/javascript" th:src="@{js/category.js}"></script>
+	<div th:replace="index :: footer"></div>
+</body>
+</html>
